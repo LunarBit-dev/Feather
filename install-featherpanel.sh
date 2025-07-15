@@ -27,11 +27,12 @@ echo "📋 Pre-installation checks..."
 
 # Check PHP version
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;")
-if php -r "exit(version_compare('$PHP_VERSION', '8.1', '<') ? 1 : 0);"; then
+if php -r "exit(version_compare('$PHP_VERSION', '8.1', '>=') ? 0 : 1);"; then
+    echo "✅ PHP version: $PHP_VERSION"
+else
     echo "❌ Error: PHP 8.1 or higher is required. You have PHP $PHP_VERSION."
     exit 1
 fi
-echo "✅ PHP version: $PHP_VERSION"
 
 # Check if composer is available
 if ! command -v composer &> /dev/null; then
