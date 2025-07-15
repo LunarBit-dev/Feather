@@ -1,5 +1,11 @@
 {
-    "name": "pterodactyl-panel",
+    "name": "featherpanel",
+    "description": "FeatherPanel - A modular enhancement framework for Pterodactyl Panel",
+    "version": "1.0.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LunarBit-dev/Feather.git"
+    },
     "engines": {
         "node": ">=14"
     },

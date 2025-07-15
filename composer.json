@@ -1,19 +1,25 @@
 {
-    "name": "pterodactyl/panel",
-    "description": "The free, open-source game management panel. Supporting Minecraft, Spigot, BungeeCord, and SRCDS servers.",
+    "name": "lunarbit-dev/feather",
+    "description": "FeatherPanel - A modular enhancement framework for Pterodactyl Panel with themes, tickets, modpacks, and more.",
     "license": "MIT",
     "authors": [
+        {
+            "name": "LunarBit Development",
+            "email": "contact@lunarbit.dev",
+            "homepage": "https://github.com/LunarBit-dev",
+            "role": "Lead Developer"
+        },
         {
             "name": "Matthew Penner",
             "email": "matthew@pterodactyl.io",
             "homepage": "https://github.com/matthewpi",
-            "role": "Lead Developer"
+            "role": "Original Pterodactyl Developer"
         },
         {
             "name": "Dane Everitt",
             "email": "dane@daneeveritt.com",
             "homepage": "https://github.com/DaneEveritt",
-            "role": "Developer"
+            "role": "Original Pterodactyl Developer"
         }
     ],
     "require": {

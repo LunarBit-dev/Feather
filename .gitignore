@@ -18,6 +18,21 @@ _ide_helper_models.php
 .yarn
 public/assets/manifest.json
 
+# FeatherPanel specific
+/themes/*
+!/themes/.gitkeep
+/plugins/*
+!/plugins/.gitkeep
+/storage/logs/feather.log
+/storage/app/themes/
+/storage/app/modpacks/
+/storage/framework/cache/feather/
+.env.feather
+
+# Theme and plugin uploads
+*.theme.zip
+*.plugin.zip
+
 # For local development with docker
 # Remove if we ever put the Dockerfile in the repo
 .dockerignore
