@@ -109,8 +109,22 @@ echo "✅ Caches cleared"
 
 # Compile assets
 echo "🎨 Compiling assets..."
-sudo npm run build
-echo "✅ Assets compiled"
+echo "   Detected Node.js $(node --version) - using legacy OpenSSL provider for compatibility..."
+
+# Set Node.js legacy OpenSSL provider for webpack compatibility
+export NODE_OPTIONS="--openssl-legacy-provider"
+
+if sudo NODE_OPTIONS="--openssl-legacy-provider" npm run build; then
+    echo "✅ Assets compiled successfully"
+else
+    echo "⚠️  Asset compilation failed, trying alternative method..."
+    if sudo NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=4096" npm run dev; then
+        echo "✅ Assets compiled with dev build"
+    else
+        echo "❌ Asset compilation failed. You may need to run 'npm run build' manually later."
+        echo "   Use: NODE_OPTIONS=\"--openssl-legacy-provider\" npm run build"
+    fi
+fi
 
 echo ""
 echo "🎉 FeatherPanel installation completed!"

@@ -69,7 +69,7 @@ FeatherPanel is a modular enhancement framework for the Pterodactyl Panel, addin
 - PHP 8.1+
 - Existing Pterodactyl Panel installation
 - Composer
-- Node.js & NPM
+- Node.js 16+ & NPM (⚠️ Node.js 17+ requires OpenSSL legacy provider - see troubleshooting)
 
 ### Installation
 ```bash
@@ -101,6 +101,62 @@ npm run build
 
 # Start development server
 php artisan serve
+```
+
+## 🚨 Troubleshooting
+
+### Node.js OpenSSL Error (Node.js 17+)
+
+If you encounter this error during asset compilation:
+```
+Error: error:0308010C:digital envelope routines::unsupported
+```
+
+**Quick Fix:**
+```bash
+# Run the automated fix script
+./fix-nodejs-build.sh
+
+# Or manually set the environment variable
+export NODE_OPTIONS="--openssl-legacy-provider"
+npm run build
+```
+
+**Permanent Solutions:**
+1. **Use Node.js 16 (Recommended):**
+   ```bash
+   nvm install 16
+   nvm use 16
+   npm run build
+   ```
+
+2. **Set permanent environment variable:**
+   ```bash
+   echo 'export NODE_OPTIONS="--openssl-legacy-provider"' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+3. **Use the updated npm scripts** (already included in package.json)
+
+### Common Issues
+
+**Permission Denied:**
+```bash
+sudo chown -R www-data:www-data /var/www/pterodactyl
+sudo chmod -R 755 storage bootstrap/cache
+```
+
+**Database Migration Errors:**
+```bash
+php artisan migrate:status
+php artisan migrate --path=database/migrations/feather
+```
+
+**Cache Issues:**
+```bash
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
 ```
 
 ## 📚 Usage Examples
