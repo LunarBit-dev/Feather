@@ -61,33 +61,40 @@ fi
 
 # Install FeatherPanel directories
 echo "📁 Creating FeatherPanel directory structure..."
-mkdir -p app/Feather/{Modpacks,Tickets,Themes,Invites,Roles,Shared,Console,config}
-mkdir -p routes/feather
-mkdir -p resources/views/feather/{themes,tickets,modpacks}
-mkdir -p database/migrations/feather
-mkdir -p plugins
-mkdir -p themes
-mkdir -p public/themes
-mkdir -p lang/en
+sudo mkdir -p app/Feather/{Modpacks,Tickets,Themes,Invites,Roles,Shared,Console,config}
+sudo mkdir -p routes/feather
+sudo mkdir -p resources/views/feather/{themes,tickets,modpacks}
+sudo mkdir -p database/migrations/feather
+sudo mkdir -p plugins
+sudo mkdir -p themes
+sudo mkdir -p public/themes
+sudo mkdir -p lang/en
 
 echo "✅ Directory structure created"
 
 # Set proper permissions
 echo "🔒 Setting permissions..."
-chmod -R 755 storage bootstrap/cache
-chmod -R 775 themes plugins public/themes
+sudo chmod -R 755 storage bootstrap/cache
+sudo chmod -R 775 themes plugins public/themes
 echo "✅ Permissions set"
 
 # Install dependencies if needed
 echo "📦 Installing/updating dependencies..."
-composer install --no-dev --optimize-autoloader
-npm install
-echo "✅ Dependencies installed"
+sudo composer install --no-dev --optimize-autoloader
+
+echo "📦 Installing npm dependencies (resolving React version conflicts)..."
+if sudo npm install --legacy-peer-deps; then
+    echo "✅ Dependencies installed successfully"
+else
+    echo "⚠️  npm install failed, trying with --force flag..."
+    sudo npm install --force
+    echo "✅ Dependencies installed with --force (may have warnings)"
+fi
 
 # Run migrations
 echo "🗄️  Running FeatherPanel migrations..."
 if [ -d "database/migrations/feather" ] && [ "$(ls -A database/migrations/feather)" ]; then
-    php artisan migrate --path=database/migrations/feather --force
+    sudo php artisan migrate --path=database/migrations/feather --force
     echo "✅ Migrations completed"
 else
     echo "ℹ️  No FeatherPanel migrations found to run"
@@ -95,14 +102,14 @@ fi
 
 # Clear caches
 echo "🧹 Clearing caches..."
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
+sudo php artisan config:clear
+sudo php artisan cache:clear
+sudo php artisan view:clear
 echo "✅ Caches cleared"
 
 # Compile assets
 echo "🎨 Compiling assets..."
-npm run build
+sudo npm run build
 echo "✅ Assets compiled"
 
 echo ""

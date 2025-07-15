@@ -9,6 +9,12 @@
     "engines": {
         "node": ">=14"
     },
+    "overrides": {
+        "@preact/signals-react": {
+            "react": "^16.14.0",
+            "react-dom": "^16.14.0"
+        }
+    },
     "dependencies": {
         "@floating-ui/react-dom-interactions": "^0.6.6",
         "@fortawesome/fontawesome-svg-core": "^1.2.32",
