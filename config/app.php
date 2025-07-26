@@ -203,11 +203,6 @@ return [
         Pterodactyl\Providers\ViewComposerServiceProvider::class,
 
         /*
-         * FeatherPanel Providers
-         */
-        App\Feather\FeatherServiceProvider::class,
-
-        /*
          * Additional Dependencies
          */
         Prologue\Alerts\AlertsServiceProvider::class,
